@@ -4,7 +4,7 @@ const countriesRouter = Router();
 const getCountryById = require('../controllers/getCountryById');
 const getCountries = require('../controllers/getCountries');
 
-//modularización de los requests que se hagan a la tabla country
+//modularization of requests done to Country model
 
 countriesRouter.get('/', getCountries);
 

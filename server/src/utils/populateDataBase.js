@@ -1,4 +1,4 @@
-const fetchAllData = require('./fetchAllData');
+const fetchAllData = require('./fetchAllApiData');
 const { Country } = require('../db');
 
 //insert data in the Country model only if it is empty
