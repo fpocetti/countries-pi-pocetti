@@ -8,10 +8,12 @@ const cors = require('cors');
 function getServer() {
 	const server = express();
 
+	//declare middlewares first
 	server.use(morgan('dev'));
 	server.use(express.json());
 	server.use(cors());
 
+	//declare router
 	server.use(router);
 
 	return server;

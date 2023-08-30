@@ -4,7 +4,7 @@ const { conn } = require('./src/db.js');
 const PORT = 3001;
 
 //initializing Server and populating database (if empty)
-//!change force: false before sending for correction!!
+//!change {force: false} before sending PI for correction!!
 
 conn
 	.sync({ force: true })
