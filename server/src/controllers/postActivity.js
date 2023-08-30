@@ -2,15 +2,20 @@ const { Activity } = require('../db');
 
 const postActivity = async (req, res) => {
 	//creates a new entry in Activity model
-	const { activity } = req.body;
-	console.log(activity);
+	const { name, difficulty, duration, season } = req.body;
+	const newActivity = {
+		name,
+		difficulty,
+		duration,
+		season,
+	};
 	try {
-		if (!activity.name || !activity.difficulty || !activity.season)
+		if (!name || !difficulty || !season)
 			return res.status(409).send("Please provide all Activity's data");
-		const createdActivity = await Activity.create(activity);
+		await Activity.create(newActivity);
 		return res
 			.status(200)
-			.json(`Activity: ${activity.name} succesfully inserted in database`);
+			.json(`Activity: ${newActivity.name} succesfully inserted in database`);
 	} catch (error) {
 		return res.status(400).json({ error: error.message });
 	}
