@@ -3,6 +3,8 @@ const router = require('./routes/index');
 const morgan = require('morgan');
 const cors = require('cors');
 
+//adding a function getServer to avoid code from executing under no command
+
 function getServer() {
 	const server = express();
 
