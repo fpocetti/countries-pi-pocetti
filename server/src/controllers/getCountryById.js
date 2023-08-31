@@ -1,7 +1,7 @@
 const { Country, Activity } = require('../db');
 
 const getCountryById = async (req, res) => {
-	//returns the country matching the id received by params (previously normalized)
+	//returns the country matching the id received by params (previously normalized), and its related activities
 
 	const { id } = req.params;
 	const normalizedId = id.toLowerCase();
