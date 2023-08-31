@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); //execute configuration of dotenv dependency, to be able to use its variables (.env)
 const { Sequelize } = require('sequelize');
 
 const fs = require('fs');
