@@ -1,26 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import CardsContainer from '../CardsContainer/CardsContainer';
-import axios from 'axios';
-import { URL_COUNTRIES } from '../../utils/serverEndpoints';
+import Filters from '../Filters/Filters';
+import style from './Home.module.css';
+import { getAllCountries, getActivityNames } from '../../redux/action';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
-	const [countries, setCountries] = useState([]);
+	const dispatch = useDispatch();
+	const allCountries = useSelector((state) => state.allCountries);
+
+	//!crear estados para traerme los continentes y los tipos de actividad turística. Luego, hacer un map para crear el listado de selects.
+
+	//!ver cómo es la forma más estética de crear filtros
 
 	useEffect(() => {
-		axios
-			.get(URL_COUNTRIES)
-			.then((response) => {
-				setCountries(response.data);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+		dispatch(getAllCountries());
+		dispatch(getActivityNames());
 	}, []);
 
+	console.log(allCountries);
+
+	const refresh = useSelector((state) => state.refresh);
+
 	return (
-		<div>
-			<h1>Welcome to your home</h1>
-			<CardsContainer countries={countries} />
+		<div className={style.container}>
+			<Filters />
+			<CardsContainer />
 		</div>
 	);
 }

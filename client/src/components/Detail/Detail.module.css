@@ -1,0 +1,42 @@
+.detail {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 100vh;
+	width: 100%;
+	background-color: #242424;
+}
+
+.detailDescription {
+	flex: 1;
+	height: 100%;
+	margin-left: 50px;
+	color: white;
+}
+
+.name {
+	font-size: 50px;
+	font-weight: 600;
+	padding-bottom: 20px;
+	margin-left: 60px;
+	letter-spacing: 2px;
+	color: #646cff;
+}
+
+.otherInfo {
+	font-size: 22px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	margin-left: 60px;
+}
+
+.image {
+	flex: 1;
+	height: 100%;
+	align-content: center;
+}
+.countryImage {
+	border-radius: 5px;
+	margin-top: 20%;
+	margin-left: 25%;
+}

@@ -249,8 +249,8 @@ Se debe desarrollar una aplicación utilizando **React** y **Redux** que conteng
 - ✅ Imagen de la bandera.
 - ✅ Continente.
 - ✅ Capital.
-- ⏺️ ⏺️ ⏺️ Subregión (si tiene).
-- ⏺️ ⏺️ ⏺️ Área (si tiene).
+- ✅ Subregión (si tiene).
+- ✅ Área (si tiene).
 - ✅ Población.
 
 <br />

@@ -1,0 +1,21 @@
+.cardsContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	background-color: #242424;
+}
+
+@media screen and (max-width: 768px) {
+	.cardsContainer {
+		justify-content: center;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.cardsContainer {
+		flex-direction: column;
+		align-items: center;
+	}
+}

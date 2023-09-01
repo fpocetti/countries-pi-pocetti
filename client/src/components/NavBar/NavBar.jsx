@@ -17,10 +17,10 @@ export default function NavBar() {
 				</Link>
 			</div>
 			<Link to="/activity/create" className={style.link}>
-				Create activity
+				✨ Create activity
 			</Link>
 			<Link to="/countries" className={style.link}>
-				Explore all countries
+				🔍 Explore all countries
 			</Link>
 			<div className={style.searchBar}>
 				<SearchBar />
