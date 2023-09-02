@@ -16,8 +16,8 @@ const getCountries = async (req, res) => {
 		const response = await Country.findAll({
 			where: {
 				name: { [Op.iLike]: `%${name}%` },
-				include: [{ model: Activity, through: { attributes: [] } }],
 			},
+			include: [{ model: Activity, through: { attributes: [] } }],
 		});
 		if (response.length === 0)
 			return res

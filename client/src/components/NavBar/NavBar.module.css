@@ -18,7 +18,7 @@
 
 .link:hover {
 	filter: drop-shadow(0 0 2em #646cffaa);
-	-webkit-transform: scale(1.02);
+	-webkit-transform: scale(1.03);
 }
 
 .logoContainer {
@@ -37,6 +37,10 @@
 	vertical-align: top;
 }
 
+.logo:hover {
+	filter: drop-shadow(0 0 2em #646cffaa);
+	-webkit-transform: scale(1.03);
+}
 .searchBar {
 	margin-right: 15px;
 }

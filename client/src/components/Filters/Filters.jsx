@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
 import { React, useState } from 'react';
 import style from './Filters.module.css';
@@ -15,11 +16,13 @@ export default function Filters() {
 	const allCountries = useSelector((state) => state.allCountries);
 	const allActivities = useSelector((state) => state.allActivities);
 	const appliedFilters = useSelector((state) => state.appliedFilters);
+	const order = useSelector((state) => state.order);
 
 	const [nameOrder, setNameOrder] = useState('');
 	const [populationOrder, setPopulationOrder] = useState('');
-	const [continentFilter, setContinentFilter] = useState('reset');
-	const [activityFilter, setActivityFilter] = useState('reset');
+
+	const [continentFilter, setContinentFilter] = useState('');
+	const [activityFilter, setActivityFilter] = useState('');
 
 	let continents = [];
 	allCountries.map((country) => {
@@ -33,10 +36,12 @@ export default function Filters() {
 	const dispatch = useDispatch();
 
 	const handleFilterByContinent = (event) => {
+		setContinentFilter(event.target.value);
 		dispatch(filterByContinent(event.target.value));
 	};
 
 	const handleFilterByActivity = (event) => {
+		setActivityFilter(event.target.value);
 		dispatch(filterByActivity(event.target.value));
 	};
 
@@ -100,6 +105,7 @@ export default function Filters() {
 						value={populationOrder}
 					>
 						<option value="">Population</option>
+
 						<option value="Population Ascending">Ascending Population</option>
 						<option value="Population Descending">Descending Population</option>
 					</select>
@@ -109,7 +115,6 @@ export default function Filters() {
 						value={nameOrder}
 					>
 						<option value="">Name</option>
-
 						<option value="Name Ascending">Ascending Name</option>
 						<option value="Name Descending">Descending Name</option>
 					</select>

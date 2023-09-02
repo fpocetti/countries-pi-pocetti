@@ -14,7 +14,11 @@ export default function Landing() {
 	return (
 		<div className={style.container}>
 			<h1>{`< Hello, world >`}</h1>
-			<button title="Navigate to all countries" onClick={navigateToHome}>
+			<button
+				title="Navigate to all countries"
+				onClick={navigateToHome}
+				className={style.button}
+			>
 				Explore all countries
 			</button>
 			<img
