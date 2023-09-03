@@ -10,6 +10,8 @@ import {
 	FILTER_BY_CONTINENT,
 	REFRESH,
 	RESET,
+	NEXT_PAGE,
+	PREV_PAGE,
 } from './action-types';
 
 export const getCountries = (name) => {
@@ -95,5 +97,21 @@ export function refresh() {
 export function resetCountries() {
 	return {
 		type: RESET,
+	};
+}
+
+export function previousPage(page) {
+	const prevPage = page - 1;
+	return {
+		type: PREV_PAGE,
+		payload: prevPage,
+	};
+}
+
+export function nextPage(page) {
+	const nextPage = page + 1;
+	return {
+		type: NEXT_PAGE,
+		payload: nextPage,
 	};
 }

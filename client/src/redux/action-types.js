@@ -10,3 +10,5 @@ export const GET_ALL_ACTIVITY_NAMES = 'GET_ALL_ACTIVITY_NAMES';
 
 export const REFRESH = 'REFRESH';
 export const RESET = 'RESET';
+export const NEXT_PAGE = 'NEXT_PAGE';
+export const PREV_PAGE = 'PREV_PAGE';

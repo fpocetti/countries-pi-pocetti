@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '../Card/Card';
 import EmptyCard from '../EmptyCard/EmptyCard';
 import Pagination from '../Pagination/Pagination';
@@ -10,11 +10,8 @@ import { useSelector } from 'react-redux';
 
 export default function CardsContainer() {
 	const filteredCountries = useSelector((state) => state.filteredCountries);
-
-	const [page, setPage] = useState(1);
-	const PAGE_SIZE = 10;
-	const countriesCount = filteredCountries.length;
-	const totalPageCount = Math.ceil(countriesCount / PAGE_SIZE);
+	const { page, pageSize } = useSelector((state) => state.pagination);
+	console.log(page, pageSize);
 
 	return (
 		<div className={style.container}>
@@ -22,7 +19,7 @@ export default function CardsContainer() {
 				{filteredCountries.length === 0 && <EmptyCard />}
 
 				{filteredCountries
-					?.slice((page - 1) * PAGE_SIZE, (page - 1) * PAGE_SIZE + PAGE_SIZE)
+					?.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize)
 					.map((country, index) => {
 						return (
 							<Card
@@ -36,11 +33,7 @@ export default function CardsContainer() {
 					})}
 			</div>
 			<div className={style.pagination}>
-				<Pagination
-					page={page}
-					setPage={setPage}
-					totalPageCount={totalPageCount}
-				/>
+				<Pagination />
 			</div>
 		</div>
 	);

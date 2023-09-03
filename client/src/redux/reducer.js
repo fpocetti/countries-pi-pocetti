@@ -9,6 +9,8 @@ import {
 	FILTER_BY_CONTINENT,
 	REFRESH,
 	RESET,
+	NEXT_PAGE,
+	PREV_PAGE,
 } from './action-types';
 
 const initialState = {
@@ -16,6 +18,12 @@ const initialState = {
 	filteredCountries: [],
 	allActivities: [],
 	refresh: false,
+	pagination: {
+		page: 1,
+		pageSize: 10,
+		countriesCount: 0,
+		totalPageCount: 0,
+	},
 	appliedFilters: {
 		activity: null,
 		continent: null,
@@ -27,17 +35,26 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-	let orderedCountries;
-	let filterByActivity;
-	let lastFilteredCountries;
 	let response;
+	let totalCountries;
+	let totalPages;
+
 	switch (action.type) {
 		case GET_COUNTRIES:
-			console.log('ejecución de get all countries');
+			console.log('ejecución de get_countries');
+			totalCountries = [...action.payload];
+
 			return {
 				...state,
-				allCountries: [...action.payload],
-				filteredCountries: [...action.payload],
+				pagination: {
+					...state.pagination,
+					countriesCount: totalCountries.length,
+					totalPageCount: Math.ceil(
+						totalCountries.length / state.pagination.pageSize
+					),
+				},
+				allCountries: totalCountries,
+				filteredCountries: totalCountries,
 			};
 
 		/* 		case GET_COUNTRY_BY_NAME:
@@ -59,6 +76,10 @@ const rootReducer = (state = initialState, action) => {
 		case ORDER_BY_NAME:
 			response = {
 				...state,
+				pagination: {
+					...state.pagination,
+					page: 1,
+				},
 				order: {
 					by: 'name',
 					type: action.payload === 'Population Ascending' ? 'asc' : 'desc',
@@ -69,11 +90,16 @@ const rootReducer = (state = initialState, action) => {
 				response.appliedFilters,
 				response.order
 			);
+
 			return response;
 
 		case ORDER_BY_POPULATION:
 			response = {
 				...state,
+				pagination: {
+					...state.pagination,
+					page: 1,
+				},
 				order: {
 					by: 'population',
 					type: action.payload === 'Population Ascending' ? 'asc' : 'desc',
@@ -89,6 +115,10 @@ const rootReducer = (state = initialState, action) => {
 		case FILTER_BY_ACTIVITY:
 			response = {
 				...state,
+				pagination: {
+					...state.pagination,
+					page: 1,
+				},
 				appliedFilters: {
 					...state.appliedFilters,
 					activity: action.payload === 'reset' ? null : action.payload,
@@ -99,6 +129,11 @@ const rootReducer = (state = initialState, action) => {
 				response.appliedFilters,
 				response.order
 			);
+			response.pagination.countriesCount = response.filteredCountries.length;
+
+			response.pagination.totalPageCount = Math.ceil(
+				response.pagination.countriesCount / state.pagination.pageSize
+			);
 			return response;
 
 		case FILTER_BY_CONTINENT:
@@ -108,11 +143,20 @@ const rootReducer = (state = initialState, action) => {
 					...state.appliedFilters,
 					continent: action.payload === 'reset' ? null : action.payload,
 				},
+				pagination: {
+					...state.pagination,
+					page: 1,
+				},
 			};
 			response.filteredCountries = applyFilters(
 				response.allCountries,
 				response.appliedFilters,
 				response.order
+			);
+			response.pagination.countriesCount = response.filteredCountries.length;
+
+			response.pagination.totalPageCount = Math.ceil(
+				response.pagination.countriesCount / state.pagination.pageSize
 			);
 			return response;
 
@@ -120,14 +164,49 @@ const rootReducer = (state = initialState, action) => {
 			console.log('Ejecución OK del reset');
 			response = {
 				...state,
-				appliedFilters: { continent: null, activity: null },
-				order: { by: null, type: null },
+				appliedFilters: {
+					continent: null,
+					activity: null,
+				},
+				order: {
+					by: null,
+					type: null,
+				},
+				pagination: {
+					...state.pagination,
+					page: 1,
+				},
 			};
 			response.filteredCountries = applyFilters(
 				response.allCountries,
 				response.appliedFilters,
 				response.order
 			);
+			response.pagination.countriesCount = response.filteredCountries.length;
+
+			response.pagination.totalPageCount = Math.ceil(
+				response.pagination.countriesCount / state.pagination.pageSize
+			);
+			return response;
+
+		case NEXT_PAGE:
+			response = {
+				...state,
+				pagination: {
+					...state.pagination,
+					page: action.payload,
+				},
+			};
+			return response;
+
+		case PREV_PAGE:
+			response = {
+				...state,
+				pagination: {
+					...state.pagination,
+					page: action.payload,
+				},
+			};
 			return response;
 
 		default:

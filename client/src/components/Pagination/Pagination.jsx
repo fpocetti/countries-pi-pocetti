@@ -1,41 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './Pagination.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { nextPage, previousPage } from '../../redux/action';
 
-export default function Pagination({ page, setPage, totalPageCount }) {
+export default function Pagination() {
 	const [disableNextButton, setDisableNextButton] = useState(false);
 	const [disablePrevButton, setDisablePrevButton] = useState(true);
+	const { page, totalPageCount } = useSelector((state) => state.pagination);
+
+	const dispatch = useDispatch();
+
+	//watches  changes in page number or total page count to call checkButtons when the state changes. This solves redux's asinchrony.
+	useEffect(() => {
+		checkButtons(page);
+	}, [page, totalPageCount]);
 
 	const checkButtons = (newPage) => {
 		if (newPage !== 1) setDisablePrevButton(false);
 		if (newPage === 1) setDisablePrevButton(true);
 		if (newPage === totalPageCount) setDisableNextButton(true);
 		if (newPage < totalPageCount) setDisableNextButton(false);
-		console.log('button Checked, page ', newPage);
 	};
 
-	function handleNext() {
+	async function handleNext() {
 		if (page < totalPageCount) {
-			setPage((page) => {
-				const nextPage = page + 1;
-				checkButtons(nextPage);
-				return nextPage;
-			});
+			const nextPageNum = checkButtons(await dispatch(nextPage(page)));
+			return nextPageNum;
 		}
-
-		console.log('disable Next', disableNextButton, 'page ', page);
-		console.log('disable Prev', disablePrevButton, 'page ', page);
 	}
 
 	const handlePrevious = () => {
 		if (page !== 1) {
-			setPage((page) => {
-				const prevPage = page - 1;
-				checkButtons(prevPage);
-				return prevPage;
-			});
+			const prevPageNum = checkButtons(dispatch(previousPage(page)));
+			return prevPageNum;
 		}
-		console.log('disable Next', disableNextButton, 'page ', page);
-		console.log('disable Prev', disablePrevButton, 'page ', page);
 	};
 
 	return (
