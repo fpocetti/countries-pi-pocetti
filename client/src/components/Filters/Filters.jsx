@@ -69,7 +69,7 @@ export default function Filters() {
 	return (
 		<div className={style.filterSection}>
 			<div>
-				<span className={style.filter}>
+				<div className={style.filter}>
 					∇ Filter countries by
 					<select
 						className={style.select}
@@ -95,9 +95,8 @@ export default function Filters() {
 							</option>
 						))}
 					</select>
-				</span>
-				<br />
-				<span className={style.order}>
+				</div>
+				<div className={style.order}>
 					↑↓ Order countries by
 					<select
 						className={style.select}
@@ -118,10 +117,12 @@ export default function Filters() {
 						<option value="Name Ascending">Ascending Name</option>
 						<option value="Name Descending">Descending Name</option>
 					</select>
-				</span>
-				<button className={style.button} onClick={handleReset}>
-					Reset filters
-				</button>
+				</div>
+				<div className={style.buttonContainer}>
+					<button className={style.button} onClick={handleReset}>
+						↺ Reset filters
+					</button>
+				</div>
 			</div>
 		</div>
 	);

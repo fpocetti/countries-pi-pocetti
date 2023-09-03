@@ -9,6 +9,7 @@
 	align-items: center;
 	text-align: center;
 	width: 230px;
+	height: 230px;
 }
 
 .card:hover {
@@ -16,6 +17,23 @@
 	-webkit-transform: scale(1.01);
 	-moz-transform: scale(1.01);
 	filter: drop-shadow(0 0 0.2em #646cffaa);
+}
+
+.imgContainer {
+	height: 80px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.titleContainer {
+	height: 90px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .cardImage {
@@ -31,7 +49,7 @@
 	padding-bottom: 10px;
 	text-decoration: none;
 	margin: 10px;
-	font-size: 22px;
+	font-size: 18px;
 	font-weight: 600;
 	letter-spacing: 1px;
 	color: #213547;
@@ -41,4 +59,5 @@
 	margin-right: 0.6em;
 	font-size: 18px;
 	color: #242424;
+	text-overflow: ellipsis;
 }

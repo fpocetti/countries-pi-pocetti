@@ -7,9 +7,13 @@ export default function Card({ flag, continent, name, id }) {
 	const nameToUpperCase = name.toUpperCase();
 	return (
 		<div className={style.card}>
-			<Link to={`/countries/${id}`}>
-				<h2 className={style.cardTitle}>{nameToUpperCase}</h2>
-				<img src={flag} alt={name} className={style.cardImage} />
+			<Link to={`/countries/${id}`} title={nameToUpperCase}>
+				<div className={style.titleContainer}>
+					<h2 className={style.cardTitle}>{nameToUpperCase}</h2>
+				</div>
+				<div className={style.imgContainer}>
+					<img src={flag} alt={name} className={style.cardImage} />
+				</div>
 				<h3 className={style.cardText}>{continent}</h3>
 			</Link>
 		</div>

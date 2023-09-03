@@ -150,7 +150,7 @@ function applyFilters(countries, filters, order) {
 		);
 	}
 	if (order.by) {
-		const orderType = order.type == 'asc' ? 1 : -1;
+		const orderType = order.type === 'asc' ? 1 : -1;
 		countriesCopy = countriesCopy.sort((a, b) =>
 			a[order.by] < b[order.by] ? orderType : orderType * -1
 		);
