@@ -23,9 +23,9 @@ module.exports = (sequelize) => {
 				},
 			},
 			duration: DataTypes.DECIMAL,
-			season: {
-				type: DataTypes.ENUM,
-				values: ['Spring', 'Summer', 'Autumn', 'Winter'],
+			seasons: {
+				type: DataTypes.ARRAY(DataTypes.STRING),
+				//values: ['Spring', 'Summer', 'Autumn', 'Winter'],
 				allowNull: false,
 			},
 		},

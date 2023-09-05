@@ -31,7 +31,7 @@ button:hover {
 	filter: drop-shadow(0 0 2em #646cffaa);
 	-webkit-transform: scale(1.03);
 }
-button:focus,
-button:focus-visible {
+LandingButton:focus,
+LandingButton:focus-visible {
 	outline: 6px auto -webkit-focus-ring-color;
 }

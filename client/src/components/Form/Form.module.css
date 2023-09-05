@@ -3,37 +3,22 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 100vh;
-	background: linear-gradient((255, 255, 255, 0.7), (255, 255, 255, 0.3));
-	background-image: url('../../assets/form-background.jpg');
+	height: 85vh;
+	background: linear-gradient((255, 255, 255, 0.9), (255, 255, 255, 0.3));
+	background-image: url('../../assets/form-activities-background-2.jpg');
 	background-size: cover;
 	background-position: center;
 }
 
 .form {
-	background-color: rgba(255, 255, 255, 0.742);
+	background-color: rgba(0, 0, 0, 0.806);
 	display: flex;
 	flex-direction: column;
-	height: 90vh;
+	height: 70vh;
 	padding: 0 40px;
 	border-radius: 5px;
 	width: 800px;
 	margin-top: 20px;
-}
-
-.input {
-	padding: 10px;
-	margin: 10px;
-	width: 280px;
-	border-color: #535bf2;
-	border-radius: 5px;
-}
-
-.customLabel {
-	padding: 10px;
-	font-weight: 600;
-	margin-right: 10px;
-	width: 120px;
 }
 
 .title {
@@ -44,36 +29,38 @@
 	text-align: center;
 }
 
-.formButton {
-	margin-top: 10px;
-	margin-bottom: 30px;
-	background-color: #535bf2;
-	color: white;
-}
-
-.continentContainer {
-	max-height: 500px;
-	overflow-y: auto;
-	background-color: white;
-	border-radius: 5px;
-	border-color: #535bf2;
+.input {
 	padding: 10px;
-	margin-bottom: 15px;
+	margin: 10px;
+	width: 280px;
+	border-color: #535bf2;
+	border-radius: 5px;
 }
 
-.countriesContainer {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 10px;
-	align-items: center;
-	font-weight: 400;
-}
-
-.continentTitle {
-	font-weight: bold;
-	font-size: 16px;
+.formSection {
+	border-radius: 5px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	height: auto;
 	margin-bottom: 10px;
-	margin-top: 10px;
+}
+
+.formSection input {
+	flex: 1;
+	padding-top: 10px;
+}
+
+.customLabel {
+	padding: 10px;
+	font-weight: 600;
+	margin-right: 10px;
+	width: 120px;
+}
+
+.labelInput {
+	display: flex;
+	flex-direction: row;
 }
 
 .seasonContainer {
@@ -84,6 +71,16 @@
 	grid-template-columns: repeat(4, 1fr);
 	gap: 10px;
 	margin-left: 15px;
+	padding-top: 10px;
+}
+
+.errorMessage {
+	font-size: 12px;
+	color: rgb(144, 8, 8);
+	padding-right: 15px;
+	font-weight: bold;
+	text-align: right;
+	margin: 0;
 }
 
 .difficultyContainer {
@@ -95,27 +92,47 @@
 	grid-template-columns: repeat(5, 1fr);
 	gap: 10px;
 	margin-left: 15px;
-}
-
-.formSection {
-	border-radius: 5px;
-	background-color: white;
-	display: flex;
-	flex-direction: row;
-	height: 60px;
-	margin-bottom: 10px;
-	align-items: center;
-}
-
-.formSection input {
-	flex: 1;
+	padding-top: 10px;
 }
 
 .formSelection {
 	padding-left: 40px;
 }
 
-.errorMessage {
-	font-size: 10px;
-	color: rgb(144, 8, 8);
+.selectCountriesContainer {
+	display: flex;
+	flex-direction: row;
+	border-radius: 5px 5px 0 0;
+	background-color: white;
+}
+
+.continentContainer {
+	max-height: 500px;
+	overflow-y: auto;
+	background-color: white;
+	border-radius: 0 0 5px 5px;
+	border-color: #535bf2;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+.continentTitle {
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+.countriesContainer {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+	align-items: center;
+	font-weight: 400;
+}
+
+.formButton {
+	margin-top: 10px;
+	margin-bottom: 30px;
+	background-color: #535bf2;
+	color: white;
 }

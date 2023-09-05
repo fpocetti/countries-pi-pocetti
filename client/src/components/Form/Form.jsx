@@ -35,7 +35,7 @@ export default function Form() {
 		name: '',
 		difficulty: '',
 		duration: '',
-		season: '',
+		seasons: [],
 		countries: [],
 	});
 
@@ -63,7 +63,10 @@ export default function Form() {
 				name: event.target.value.toUpperCase(),
 			});
 		} else {
-			setActivity({ ...activity, [event.target.name]: event.target.value });
+			setActivity({
+				...activity,
+				seasons: [...activity.seasons, event.target.value],
+			});
 		}
 
 		setErrors(
@@ -74,6 +77,7 @@ export default function Form() {
 		);
 	};
 	console.log(activity);
+	console.log(errors);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -87,85 +91,101 @@ export default function Form() {
 					Fill in this form to create a new Activity
 				</h2>
 				<div className={style.formSection}>
-					<label htmlFor="name" className={style.customLabel}>
-						Activity name
-					</label>
-					<input
-						type="text"
-						name="name"
-						value={activity.name}
-						onChange={handleChange}
-						className={style.input}
-						placeholder="Activity name"
-					/>
+					<div className={style.labelInput}>
+						<label htmlFor="name" className={style.customLabel}>
+							Activity name
+						</label>
+						<input
+							type="text"
+							name="name"
+							value={activity.name}
+							onChange={handleChange}
+							className={style.input}
+							placeholder="Activity name"
+						/>
+					</div>
 					{errors.name && <p className={style.errorMessage}>{errors.name}</p>}
 				</div>
 
 				<div className={style.formSection}>
-					<label htmlFor="duration" className={style.customLabel}>
-						Duration (hs)
-					</label>
-					<input
-						type="number"
-						name="duration"
-						value={activity.duration}
-						onChange={handleChange}
-						className={style.input}
-					/>
+					<div className={style.labelInput}>
+						<label htmlFor="duration" className={style.customLabel}>
+							Duration (hs)
+						</label>
+						<input
+							type="number"
+							name="duration"
+							value={activity.duration}
+							onChange={handleChange}
+							className={style.input}
+						/>
+					</div>
 					{errors.duration && (
 						<p className={style.errorMessage}>{errors.duration}</p>
 					)}
 				</div>
 
 				<div className={style.formSection}>
-					<label htmlFor="difficulty" className={style.customLabel}>
-						Difficulty
-					</label>
-					<div className={style.difficultyContainer}>
-						{difficultyLevels.map((difficulty, index) => (
-							<div key={index}>
-								<input
-									type="radio"
-									name="difficulty"
-									value={difficulty}
-									checked={activity.difficulty === difficulty}
-									onChange={handleChange}
-								></input>
-								<label key={index} htmlFor="difficulty">
-									{difficulty}
-								</label>
-							</div>
-						))}
+					<div className={style.labelInput}>
+						<label htmlFor="difficulty" className={style.customLabel}>
+							Difficulty
+						</label>
+						<div className={style.difficultyContainer}>
+							{difficultyLevels.map((difficulty, index) => (
+								<div key={index}>
+									<input
+										type="radio"
+										name="difficulty"
+										value={difficulty}
+										checked={activity.difficulty === difficulty}
+										onChange={handleChange}
+									></input>
+									<label key={index} htmlFor="difficulty">
+										{difficulty}
+									</label>
+								</div>
+							))}
+						</div>
 					</div>
-					{errors.difficulty && <p>{errors.difficulty}</p>}
-				</div>
-
-				<div className={style.formSection}>
-					<label htmlFor="season" className={style.customLabel}>
-						Season
-					</label>
-					<div className={style.seasonContainer}>
-						{seasons.sort().map((season, index) => (
-							<div key={index}>
-								<input
-									type="radio"
-									name="season"
-									value={season}
-									checked={activity.season === season}
-									key={index}
-									onChange={handleChange}
-								/>
-								<label htmlFor={season}>{season}</label>
-							</div>
-						))}
-					</div>
-					{errors.season && (
-						<p className={style.errorMessage}>{errors.season}</p>
+					{errors.difficulty && (
+						<p className={style.errorMessage}>{errors.difficulty}</p>
 					)}
 				</div>
 
-				<label className={style.customLabel}>Countries</label>
+				<div className={style.formSection}>
+					<div className={style.labelInput}>
+						<label htmlFor="seasons" className={style.customLabel}>
+							Season
+						</label>
+						<div className={style.seasonContainer}>
+							{seasons.sort().map((season, index) => (
+								<div key={index}>
+									<input
+										type="checkbox"
+										name="seasons"
+										value={season}
+										checked={activity.seasons === season}
+										key={index}
+										onChange={handleChange}
+									/>
+									<label htmlFor={season}>{season}</label>
+								</div>
+							))}
+						</div>
+					</div>
+					{errors.seasons && (
+						<p className={style.errorMessage}>{errors.seasons}</p>
+					)}
+				</div>
 
+				<div className={style.selectCountriesContainer}>
+					<label className={style.customLabel}>Countries</label>
+					<div>
+						{errors.countries && (
+							<p className={style.errorMessage}>{errors.countries}</p>
+						)}
+					</div>
+				</div>
 				<div className={style.continentContainer}>
 					{Object.keys(countriesByContinent).map((continent) => (
 						<div key={continent} className={style.continentTitle}>
@@ -188,10 +208,22 @@ export default function Form() {
 							</div>
 						</div>
 					))}
-					<div>{errors.countries && <p>{errors.countries}</p>}</div>
 				</div>
 
-				<button type="submit" className={style.formButton}>
+				<button
+					type="submit"
+					className={style.formButton}
+					disabled={
+						activity.countries.length === 0 ||
+						activity.difficulty.length === 0 ||
+						activity.seasons.length === 0 ||
+						errors.name ||
+						errors.duration ||
+						errors.seasons ||
+						errors.difficulty ||
+						errors.countries
+					}
+				>
 					Create activity
 				</button>
 			</form>
