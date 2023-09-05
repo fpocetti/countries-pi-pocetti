@@ -146,24 +146,24 @@ La idea de este proyecto es construir una aplicación web a partir de la API [**
 
 **📍 MODELO 1 | Country**
 
-- ID (Código de tres letras). \*
-- Nombre. \*
-- Imagen de la bandera. \*
-- Continente. \*
-- Capital. \*
-- Subregión.
-- Área.
-- Población. \*
+- ✅ ID (Código de tres letras). \*
+- ✅ Nombre. \*
+- ✅ Imagen de la bandera. \*
+- ✅ Continente. \*
+- ✅ Capital. \*
+- ✅ Subregión.
+- ✅ Área.
+- ✅ Población. \*
 
 <br />
 
 **📍 MODELO 2 | Activity**
 
-- ID. \*
-- Nombre. \*
-- Dificultad (número del 1 al 5). \*
-- Duración (en horas).
-- Temporada (Verano, Otoño, Invierno o Primavera). \*
+- ✅ ID. \*
+- ✅ Nombre. \*
+- ✅ Dificultad (número del 1 al 5). \*
+- ✅ Duración (en horas).
+- ✅ Temporada (Verano, Otoño, Invierno o Primavera). \*
 
 <br />
 

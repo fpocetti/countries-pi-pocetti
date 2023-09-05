@@ -21,8 +21,8 @@
 	padding-bottom: 2.5em;
 }
 
-button {
-	border-width: 2px;
+.landingButton {
+	border-width: 3px;
 	border-color: #646cff;
 }
 button:hover {
@@ -31,7 +31,11 @@ button:hover {
 	filter: drop-shadow(0 0 2em #646cffaa);
 	-webkit-transform: scale(1.03);
 }
-LandingButton:focus,
-LandingButton:focus-visible {
+button:focus,
+button:focus-visible {
 	outline: 6px auto -webkit-focus-ring-color;
+}
+
+.landingSearchBar {
+	margin-right: 30px;
 }

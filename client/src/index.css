@@ -60,6 +60,7 @@ button:disabled {
 	outline: 0;
 	pointer-events: none;
 	color: darkgray;
+	cursor: not-allowed;
 }
 
 @media (prefers-color-scheme: light) {

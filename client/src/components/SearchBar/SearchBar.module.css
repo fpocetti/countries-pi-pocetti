@@ -2,7 +2,6 @@
 	will-change: filter;
 	display: flex;
 	align-items: center;
-	margin-right: 30px;
 }
 
 .button {
@@ -10,7 +9,7 @@
 	color: #fff;
 	border: none;
 	border-radius: 0 5px 5px 0;
-	height: 100%;
+	height: 39px;
 	cursor: pointer;
 }
 
@@ -29,9 +28,15 @@
 	border-radius: 5px 0 0 5px;
 	padding: 0.5em 5px; /* Adjust padding for better appearance */
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	height: 39px;
 }
 
 .input:hover {
+	cursor: text;
 	filter: drop-shadow(0 0 0.2em rgb(228, 228, 241));
-	-webkit-transform: scale(1.02);
+	/*-webkit-transform: scale(1.02); */
+}
+
+input::placeholder {
+	padding: 5px;
 }

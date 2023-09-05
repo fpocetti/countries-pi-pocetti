@@ -17,7 +17,7 @@ export default function Landing() {
 			<button
 				title="Navigate to all countries"
 				onClick={navigateToHome}
-				className={style.button}
+				className={style.landingButton}
 			>
 				Explore all countries
 			</button>

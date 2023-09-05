@@ -17,6 +17,11 @@
 	width: 121px;
 }
 
-button:disabled {
+button::hover {
+	cursor: pointer;
+}
+
+button::disabled {
 	background-color: #535bf273;
+	cursor: not-allowed;
 }
