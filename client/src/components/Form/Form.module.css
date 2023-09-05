@@ -1,6 +1,5 @@
 .formContainer {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -15,10 +14,8 @@
 	background-color: rgba(255, 255, 255, 0.742);
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 70vh;
-	padding: 40px;
+	height: 90vh;
+	padding: 0 40px;
 	border-radius: 5px;
 	width: 800px;
 	margin-top: 20px;
@@ -32,18 +29,11 @@
 	border-radius: 5px;
 }
 
-label {
+.customLabel {
 	padding: 10px;
 	font-weight: 600;
 	margin-right: 10px;
-}
-
-select {
-	width: 300px;
-	padding: 10px;
-	margin: 10px;
-	border-color: #535bf2;
-	border-radius: 5px;
+	width: 120px;
 }
 
 .title {
@@ -51,8 +41,81 @@ select {
 	color: #535bf2;
 	height: 10vh;
 	font-size: 2em;
+	text-align: center;
 }
 
-.button {
-	margin: 15px 0;
+.formButton {
+	margin-top: 10px;
+	margin-bottom: 30px;
+	background-color: #535bf2;
+	color: white;
+}
+
+.continentContainer {
+	max-height: 500px;
+	overflow-y: auto;
+	background-color: white;
+	border-radius: 5px;
+	border-color: #535bf2;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+.countriesContainer {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+	align-items: center;
+	font-weight: 400;
+}
+
+.continentTitle {
+	font-weight: bold;
+	font-size: 16px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.seasonContainer {
+	border-color: #535bf2;
+	border-radius: 5px;
+	background-color: white;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
+	margin-left: 15px;
+}
+
+.difficultyContainer {
+	border-color: #535bf2;
+	border-width: 1px;
+	border-radius: 5px;
+	background-color: white;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 10px;
+	margin-left: 15px;
+}
+
+.formSection {
+	border-radius: 5px;
+	background-color: white;
+	display: flex;
+	flex-direction: row;
+	height: 60px;
+	margin-bottom: 10px;
+	align-items: center;
+}
+
+.formSection input {
+	flex: 1;
+}
+
+.formSelection {
+	padding-left: 40px;
+}
+
+.errorMessage {
+	font-size: 10px;
+	color: rgb(144, 8, 8);
 }

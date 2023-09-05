@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from '../SearchBar/SearchBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import style from './NavBar.module.css';
 import logo from '../../assets/rotating-earth.gif';
 

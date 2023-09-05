@@ -10,6 +10,7 @@ import {
 	resetCountries,
 } from '../../redux/action';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function Filters() {
 	const filteredCountries = useSelector((state) => state.filteredCountries);
@@ -23,6 +24,8 @@ export default function Filters() {
 
 	const [continentFilter, setContinentFilter] = useState('');
 	const [activityFilter, setActivityFilter] = useState('');
+
+	const navigate = useNavigate();
 
 	let continents = [];
 	allCountries.map((country) => {
@@ -64,6 +67,7 @@ export default function Filters() {
 		setActivityFilter('reset');
 
 		dispatch(resetCountries(event.target.value));
+		navigate('/countries');
 	};
 
 	return (

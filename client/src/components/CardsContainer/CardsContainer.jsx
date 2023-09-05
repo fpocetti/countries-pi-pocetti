@@ -10,30 +10,39 @@ import { useSelector } from 'react-redux';
 
 export default function CardsContainer() {
 	const filteredCountries = useSelector((state) => state.filteredCountries);
-	const { page, pageSize } = useSelector((state) => state.pagination);
-	console.log(page, pageSize);
+	const { page, totalPageCount, pageSize } = useSelector(
+		(state) => state.pagination
+	);
 
 	return (
 		<div className={style.container}>
-			<div className={style.cardsContainer}>
-				{filteredCountries.length === 0 && <EmptyCard />}
-
-				{filteredCountries
-					?.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize)
-					.map((country, index) => {
-						return (
-							<Card
-								key={index}
-								id={country.id}
-								flag={country.flag}
-								continent={country.continent}
-								name={country.name}
-							/>
-						);
-					})}
-			</div>
-			<div className={style.pagination}>
-				<Pagination />
+			<div>
+				{filteredCountries.length === 0 ? (
+					<EmptyCard className={style.emptyCard} />
+				) : (
+					<div className={style.pages}>
+						<div className={style.cardsContainer}>
+							{filteredCountries
+								?.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize)
+								.map((country, index) => {
+									return (
+										<Card
+											key={index}
+											id={country.id}
+											flag={country.flag}
+											continent={country.continent}
+											name={country.name}
+										/>
+									);
+								})}
+						</div>
+						{totalPageCount > 1 && (
+							<div className={style.pagination}>
+								<Pagination />
+							</div>
+						)}
+					</div>
+				)}
 			</div>
 		</div>
 	);

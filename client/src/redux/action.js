@@ -12,17 +12,19 @@ import {
 	RESET,
 	NEXT_PAGE,
 	PREV_PAGE,
+	GET_COUNTRY_BY_NAME,
+	POST_ACTIVITY,
 } from './action-types';
 
-export const getCountries = (name) => {
+export const getCountries = () => {
 	return async function (dispatch) {
 		try {
 			let response;
-			if (name) {
+			/* 			if (name) {
 				response = await axios.get(`${URL_COUNTRIES}?name=${name}`);
 			} else {
-				response = await axios.get(URL_COUNTRIES);
-			}
+      } */
+			response = await axios.get(URL_COUNTRIES);
 			return dispatch({
 				type: GET_COUNTRIES,
 				payload: response.data,
@@ -33,7 +35,7 @@ export const getCountries = (name) => {
 	};
 };
 
-/* export const getCountriesByName = (name) => {
+export const getCountriesByName = (name) => {
 	console.log('request al server ', name);
 
 	return async function (dispatch) {
@@ -47,7 +49,7 @@ export const getCountries = (name) => {
 			console.error(error);
 		}
 	};
-}; */
+};
 
 export const getActivityNames = () => {
 	return async function (dispatch) {
@@ -56,6 +58,22 @@ export const getActivityNames = () => {
 			return dispatch({
 				type: GET_ALL_ACTIVITY_NAMES,
 				payload: response.data,
+			});
+		} catch (error) {
+			console.error(error);
+		}
+	};
+};
+
+export const postActivity = (activity) => {
+	return async function (dispatch) {
+		try {
+			await axios.post(URL_ACTIVITIES, activity).then(({ data }) => {
+				console.log('action creator hit with ', data);
+				return dispatch({
+					type: POST_ACTIVITY,
+					payload: data,
+				});
 			});
 		} catch (error) {
 			console.error(error);

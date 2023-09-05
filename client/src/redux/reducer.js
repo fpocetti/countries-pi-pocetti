@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import {
 	GET_COUNTRIES,
+	GET_COUNTRY_BY_NAME,
 	GET_ALL_ACTIVITY_NAMES,
 	ORDER_BY_NAME,
 	ORDER_BY_POPULATION,
@@ -11,13 +12,17 @@ import {
 	RESET,
 	NEXT_PAGE,
 	PREV_PAGE,
+	POST_ACTIVITY,
 } from './action-types';
+
+import applyFilters from '../utils/applyFilters';
 
 const initialState = {
 	allCountries: [],
 	filteredCountries: [],
 	allActivities: [],
 	refresh: false,
+	searchQuery: '',
 	pagination: {
 		page: 1,
 		pageSize: 10,
@@ -57,13 +62,22 @@ const rootReducer = (state = initialState, action) => {
 				filteredCountries: totalCountries,
 			};
 
-		/* 		case GET_COUNTRY_BY_NAME:
+		case GET_COUNTRY_BY_NAME:
 			console.log('ejecución de get country by name', action.payload);
+			totalCountries = [...action.payload];
 
 			return {
 				...state,
-				filteredCountries: [...action.payload],
-			}; */
+				filteredCountries: totalCountries,
+				pagination: {
+					...state.pagination,
+					page: 1,
+					countriesCount: totalCountries.length,
+					totalPageCount: Math.ceil(
+						totalCountries.length / state.pagination.pageSize
+					),
+				},
+			};
 
 		case GET_ALL_ACTIVITY_NAMES:
 			console.log('ejecución de get all activities');
@@ -71,6 +85,14 @@ const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				allActivities: [...action.payload],
+			};
+
+		case POST_ACTIVITY:
+			console.log('ejecución del post activity');
+
+			return {
+				...state,
+				allActivities: [...state.allActivities, action.payload],
 			};
 
 		case ORDER_BY_NAME:
@@ -176,6 +198,7 @@ const rootReducer = (state = initialState, action) => {
 					...state.pagination,
 					page: 1,
 				},
+				searchQuery: '',
 			};
 			response.filteredCountries = applyFilters(
 				response.allCountries,
@@ -215,26 +238,5 @@ const rootReducer = (state = initialState, action) => {
 			};
 	}
 };
-
-function applyFilters(countries, filters, order) {
-	let countriesCopy = [...countries];
-	if (filters.continent) {
-		countriesCopy = countriesCopy.filter(
-			(country) => country.continent === filters.continent
-		);
-	}
-	if (filters.activity) {
-		countriesCopy = countriesCopy.filter((country) =>
-			country.Activities.some((activity) => activity.name === filters.activity)
-		);
-	}
-	if (order.by) {
-		const orderType = order.type === 'asc' ? 1 : -1;
-		countriesCopy = countriesCopy.sort((a, b) =>
-			a[order.by] < b[order.by] ? orderType : orderType * -1
-		);
-	}
-	return countriesCopy;
-}
 
 export default rootReducer;

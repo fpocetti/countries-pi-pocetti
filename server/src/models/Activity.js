@@ -12,6 +12,7 @@ module.exports = (sequelize) => {
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,
+				unique: true,
 			},
 			difficulty: {
 				type: DataTypes.INTEGER,
@@ -21,7 +22,7 @@ module.exports = (sequelize) => {
 					max: 5,
 				},
 			},
-			duration: DataTypes.TIME,
+			duration: DataTypes.DECIMAL,
 			season: {
 				type: DataTypes.ENUM,
 				values: ['Spring', 'Summer', 'Autumn', 'Winter'],

@@ -1,47 +1,83 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import style from './Form.module.css';
+import { getCountries, postActivity } from '../../redux/action';
+import createActivityValidations from '../../utils/createActivityValidations';
 
 export default function Form() {
 	const allActivities = useSelector((state) => state.allActivities);
 	const allCountries = useSelector((state) => state.allCountries);
 
-	let countryNames = [];
-	allCountries.map((country) => {
-		if (!countryNames.includes(country.name)) {
-			countryNames.push(country.name);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getCountries());
+	}, []);
+
+	//Reorganize countries by continent to improve form's UX
+	let countriesByContinent = {};
+
+	allCountries.forEach((country) => {
+		if (!countriesByContinent[country.continent]) {
+			countriesByContinent[country.continent] = [];
 		}
-		return countryNames;
+		countriesByContinent[country.continent].push(country);
 	});
 
-	console.log('country names at the form ', countryNames.length);
 	//me traigo el array con activity names para la validación
 	const activityNames = allActivities.map((activity) => activity.name);
 
 	const seasons = ['Spring', 'Summer', 'Autumn', 'Winter'];
 	const difficultyLevels = [1, 2, 3, 4, 5];
-	const [selectedCountries, setSelectedCountries] = useState([]);
-	const [errors, setErrors] = useState({});
 
 	const [activity, setActivity] = useState({
 		name: '',
 		difficulty: '',
 		duration: '',
 		season: '',
+		countries: [],
 	});
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-	};
+	const [errors, setErrors] = useState({});
 
 	const handleChange = (event) => {
-		setActivity({ ...activity, [event.target.name]: event.target.value });
+		if (event.target.name === 'countries') {
+			setActivity({
+				...activity,
+				countries: [...activity.countries, event.target.value],
+			});
+		} else if (event.target.name === 'difficulty') {
+			setActivity({
+				...activity,
+				difficulty: parseInt(event.target.value),
+			});
+		} else if (event.target.name === 'duration') {
+			setActivity({
+				...activity,
+				duration: parseFloat(event.target.value),
+			});
+		} else if (event.target.name === 'name') {
+			setActivity({
+				...activity,
+				name: event.target.value.toUpperCase(),
+			});
+		} else {
+			setActivity({ ...activity, [event.target.name]: event.target.value });
+		}
+
+		setErrors(
+			createActivityValidations({
+				...activity,
+				[event.target.name]: event.target.value,
+			})
+		);
 	};
 	console.log(activity);
 
-	const handleSelectCountryChange = (event) => {
-		// const selected =
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		dispatch(postActivity(activity));
 	};
 
 	return (
@@ -50,8 +86,10 @@ export default function Form() {
 				<h2 className={style.title}>
 					Fill in this form to create a new Activity
 				</h2>
-				<div>
-					<label htmlFor="name">Activity name</label>
+				<div className={style.formSection}>
+					<label htmlFor="name" className={style.customLabel}>
+						Activity name
+					</label>
 					<input
 						type="text"
 						name="name"
@@ -60,33 +98,13 @@ export default function Form() {
 						className={style.input}
 						placeholder="Activity name"
 					/>
-					{errors.name && <p>{errors.name}</p>}
+					{errors.name && <p className={style.errorMessage}>{errors.name}</p>}
 				</div>
 
-				<div>
-					<label htmlFor="difficulty">Difficulty</label>
-					<select
-						type="text"
-						name="difficulty"
-						value={activity.difficulty}
-						onChange={handleChange}
-						className={style.input}
-						placeholder="Difficulty 1 easiest... 5 hardest"
-					>
-						<option value="" key="season">
-							Select difficulty
-						</option>
-						{difficultyLevels.map((difficulty, index) => (
-							<option value={activity.difficulty} key={index}>
-								{difficulty}
-							</option>
-						))}
-					</select>
-					{errors.difficulty && <p>{errors.difficulty}</p>}
-				</div>
-
-				<div>
-					<label htmlFor="duration">Duration (hs)</label>
+				<div className={style.formSection}>
+					<label htmlFor="duration" className={style.customLabel}>
+						Duration (hs)
+					</label>
 					<input
 						type="number"
 						name="duration"
@@ -94,54 +112,88 @@ export default function Form() {
 						onChange={handleChange}
 						className={style.input}
 					/>
-					{errors.duration && <p>{errors.duration}</p>}
+					{errors.duration && (
+						<p className={style.errorMessage}>{errors.duration}</p>
+					)}
 				</div>
 
-				<div>
-					<label htmlFor="season">Season</label>
-					<select
-						type="text"
-						name="season"
-						value={activity.season}
-						onChange={handleChange}
-						className={style.select}
-					>
-						<option value="" key="season">
-							Select season
-						</option>
+				<div className={style.formSection}>
+					<label htmlFor="difficulty" className={style.customLabel}>
+						Difficulty
+					</label>
+					<div className={style.difficultyContainer}>
+						{difficultyLevels.map((difficulty, index) => (
+							<div key={index}>
+								<input
+									type="radio"
+									name="difficulty"
+									value={difficulty}
+									checked={activity.difficulty === difficulty}
+									onChange={handleChange}
+								></input>
+								<label key={index} htmlFor="difficulty">
+									{difficulty}
+								</label>
+							</div>
+						))}
+					</div>
+					{errors.difficulty && <p>{errors.difficulty}</p>}
+				</div>
+
+				<div className={style.formSection}>
+					<label htmlFor="season" className={style.customLabel}>
+						Season
+					</label>
+					<div className={style.seasonContainer}>
 						{seasons.sort().map((season, index) => (
-							<option value={activity.season} key={index}>
-								{season}
-							</option>
+							<div key={index}>
+								<input
+									type="radio"
+									name="season"
+									value={season}
+									checked={activity.season === season}
+									key={index}
+									onChange={handleChange}
+								/>
+								<label htmlFor={season}>{season}</label>
+							</div>
 						))}
-					</select>
-					{errors.season && <p>{errors.season}</p>}
+					</div>
+					{errors.season && (
+						<p className={style.errorMessage}>{errors.season}</p>
+					)}
 				</div>
 
-				<div>
-					<label htmlFor="countries">Country</label>
-					<select
-						multiple
-						name="countries"
-						value={selectedCountries}
-						onChange={handleChange}
-						className={style.input}
-					>
-						<option value="" key="countries">
-							Select one or more countries
-						</option>
+				<label className={style.customLabel}>Countries</label>
 
-						{/* research how to connect to country's ID */}
-						{countryNames.sort().map((country, index) => (
-							<option value={country} key={index}>
-								{country}
-							</option>
-						))}
-					</select>
-					{errors.countries && <p>{errors.countries}</p>}
+				<div className={style.continentContainer}>
+					{Object.keys(countriesByContinent).map((continent) => (
+						<div key={continent} className={style.continentTitle}>
+							<h3>{continent}</h3>
+							<div className={style.countriesContainer}>
+								{countriesByContinent[continent]
+									.sort((a, b) => a.name.localeCompare(b.name))
+									.map((country, index) => (
+										<div key={index}>
+											<input
+												id={country.id}
+												type="checkbox"
+												name="countries"
+												value={country.id}
+												onChange={handleChange}
+											/>
+											<label htmlFor={country.name}>{country.name}</label>
+										</div>
+									))}
+							</div>
+						</div>
+					))}
+					<div>{errors.countries && <p>{errors.countries}</p>}</div>
 				</div>
 
-				<button type="submit">Create activity</button>
+				<button type="submit" className={style.formButton}>
+					Create activity
+				</button>
 			</form>
 		</div>
 	);
