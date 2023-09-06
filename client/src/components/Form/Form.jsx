@@ -19,11 +19,6 @@ export default function Form() {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getCountries());
-		dispatch(getActivityNames());
-	}, []);
-
 	//Reorganize countries by continent to improve form's UX
 	let countriesByContinent = {};
 
@@ -125,6 +120,19 @@ export default function Form() {
 		event.preventDefault();
 		dispatch(postActivity(activity));
 	};
+
+	useEffect(() => {
+		dispatch(getCountries());
+		dispatch(getActivityNames());
+
+		//handle asynchrony in name validation
+		if (activityNames.includes(activity.name.trim())) {
+			setErrors({
+				...errors,
+				name: 'This name has already been used. Please create a different activity',
+			});
+		}
+	}, [activity]);
 
 	return (
 		<div className={style.formContainer}>
