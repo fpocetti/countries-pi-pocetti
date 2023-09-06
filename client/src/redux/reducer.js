@@ -23,6 +23,7 @@ const initialState = {
 	allActivities: [],
 	refresh: false,
 	searchQuery: '',
+	postMessage,
 	pagination: {
 		page: 1,
 		pageSize: 10,
@@ -88,11 +89,10 @@ const rootReducer = (state = initialState, action) => {
 			};
 
 		case POST_ACTIVITY:
-			console.log('ejecución del post activity');
-
+			console.log('ejecución del post activity: ', action.payload);
 			return {
 				...state,
-				allActivities: [...state.allActivities, action.payload],
+				postMessage: action.payload,
 			};
 
 		case ORDER_BY_NAME:

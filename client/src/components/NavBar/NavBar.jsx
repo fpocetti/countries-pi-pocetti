@@ -16,6 +16,7 @@ export default function NavBar() {
 					/>
 				</Link>
 			</div>
+
 			<Link to="/activity/create" className={style.link}>
 				✨ Create activity
 			</Link>

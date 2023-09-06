@@ -69,7 +69,7 @@ export const postActivity = (activity) => {
 	return async function (dispatch) {
 		try {
 			await axios.post(URL_ACTIVITIES, activity).then(({ data }) => {
-				console.log('action creator hit with ', data);
+				console.log(data);
 				return dispatch({
 					type: POST_ACTIVITY,
 					payload: data,

@@ -1,6 +1,6 @@
 .card {
 	margin: 15px;
-	background-color: #d0d1f0e4;
+	background-color: #d6d6f4;
 	border-radius: 10px;
 	position: relative;
 	display: flex;
@@ -10,13 +10,15 @@
 	text-align: center;
 	width: 230px;
 	height: 230px;
+	border: 1px solid #535bf200;
 }
 
 .card:hover {
-	transform: scale(1.01);
+	transform: scale(1.02);
 	-webkit-transform: scale(1.01);
 	-moz-transform: scale(1.01);
-	filter: drop-shadow(0 0 0.2em #646cffaa);
+	filter: drop-shadow(0 0 0.2em #8288ffaa);
+	border: 1px solid #535bf2;
 }
 
 .imgContainer {

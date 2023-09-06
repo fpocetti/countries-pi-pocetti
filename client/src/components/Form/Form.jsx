@@ -16,6 +16,8 @@ export default function Form() {
 	//connect to Activity names to validate if name is in use
 	const allActivities = useSelector((state) => state.allActivities);
 	const activityNames = allActivities.map((activity) => activity.name);
+	//connect to post response
+	const postMessage = useSelector((state) => state.postMessage);
 
 	const dispatch = useDispatch();
 
@@ -116,9 +118,22 @@ export default function Form() {
 	console.log('Activity: ', activity);
 	console.log('Error: ', errors);
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		dispatch(postActivity(activity));
+
+		try {
+			await dispatch(postActivity(activity));
+			setActivity({
+				name: '',
+				difficulty: '',
+				duration: '',
+				seasons: '',
+				countries: '',
+			});
+		} catch (error) {
+			console.error(error);
+		}
+		alert(postMessage);
 	};
 
 	useEffect(() => {
@@ -187,6 +202,7 @@ export default function Form() {
 								{difficultyLevels.map((difficulty, index) => (
 									<div key={index}>
 										<input
+											className={style.option}
 											type="radio"
 											name="difficulty"
 											value={difficulty}
@@ -214,6 +230,7 @@ export default function Form() {
 								{seasons.sort().map((season, index) => (
 									<div key={index}>
 										<input
+											className={style.option}
 											type="checkbox"
 											name="seasons"
 											value={season}

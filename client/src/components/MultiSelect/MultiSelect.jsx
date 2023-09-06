@@ -15,6 +15,7 @@ const MultiSelect = ({ countriesByContinent, activity, handleChange }) => {
 								.map((country) => (
 									<div key={country.id}>
 										<input
+											className={style.country}
 											type="checkbox"
 											checked={activity.countries.includes(country.id)}
 											key={country.id}
