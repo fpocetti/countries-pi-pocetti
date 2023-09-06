@@ -7,33 +7,36 @@ const handleChange = (
 	setErrors,
 	activityNames
 ) => {
-	let activityUpdates = {};
+	let updates = {
+		activityUpdates: {},
+		errorUpdates: {},
+	};
 
 	if (event.target.name === 'countries') {
-		activityUpdates = {
+		updates.activityUpdates = {
 			...activity,
 			countries: event.target.checked
 				? [...activity.countries, event.target.value]
 				: activity.countries.filter((country) => country != event.target.value),
 		};
 	} else if (event.target.name === 'difficulty') {
-		activityUpdates = {
+		updates.activityUpdates = {
 			...activity,
 			difficulty: parseInt(event.target.value),
 		};
 	} else if (event.target.name === 'duration') {
-		activityUpdates = {
+		updates.activityUpdates = {
 			...activity,
 			duration: parseFloat(event.target.value),
 		};
 	} else if (event.target.name === 'name') {
-		activityUpdates = {
+		updates.activityUpdates = {
 			...activity,
 			name: event.target.value.toUpperCase(),
 		};
 	} else if (event.target.name === 'seasons') {
-		activityUpdates = {
-			...activityUpdates,
+		updates.activityUpdates = {
+			...activity,
 			seasons: event.target.checked
 				? [...activity.seasons, event.target.value]
 				: activity.seasons.filter((season) => season != event.target.value),
@@ -42,10 +45,10 @@ const handleChange = (
 
 	setActivity({
 		...activity,
-		...activityUpdates,
+		...updates.activityUpdates,
 	});
 
-	const updatedErrors = createActivityValidations(
+	updates.errorUpdates = createActivityValidations(
 		{
 			...activity,
 			[event.target.name]: event.target.value,
@@ -53,9 +56,12 @@ const handleChange = (
 		activityNames
 	);
 
-	setErrors(updatedErrors);
+	setErrors(updates.errorUpdates);
 
-	if (event.target.name === 'seasons' && activityUpdates.seasons.length === 0) {
+	if (
+		event.target.name === 'seasons' &&
+		updates.activityUpdates.seasons.length === 0
+	) {
 		setErrors((errors) => ({
 			...errors,
 			seasons: 'Please include at least one season',
@@ -64,13 +70,14 @@ const handleChange = (
 
 	if (
 		event.target.name === 'countries' &&
-		activityUpdates.countries.length === 0
+		updates.activityUpdates.countries.length === 0
 	) {
 		setErrors((errors) => ({
 			...errors,
 			countries: 'Please include at least one country',
 		}));
 	}
+	return updates;
 };
 
 export default handleChange;

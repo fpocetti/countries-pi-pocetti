@@ -9,7 +9,7 @@ import {
 } from '../../redux/action';
 import createActivityValidations from '../../utils/createActivityValidations';
 import MultiSelect from '../MultiSelect/MultiSelect';
-//import handleFormChange from '../../utils/handleFormChange';
+import handleChange from '../../utils/handleFormChange';
 
 export default function Form() {
 	const allCountries = useSelector((state) => state.allCountries);
@@ -47,7 +47,7 @@ export default function Form() {
 
 	const [errors, setErrors] = useState({});
 
-	const handleChange = (event) => {
+	/* 	const handleChange = (event) => {
 		let activityUpdates = {};
 
 		if (event.target.name === 'countries') {
@@ -117,7 +117,10 @@ export default function Form() {
 				countries: 'Please include at least one country',
 			}));
 		}
-	};
+	}; */
+
+	const updates = handleChange(activity, setActivity, setErrors, activityNames);
+
 	console.log('Activity: ', activity);
 	console.log('Error: ', errors);
 
@@ -144,7 +147,15 @@ export default function Form() {
 								type="text"
 								name="name"
 								value={activity.name}
-								onChange={handleChange}
+								onChange={(event) =>
+									handleChange(
+										event,
+										activity,
+										setActivity,
+										setErrors,
+										activityNames
+									)
+								}
 								className={style.input}
 								placeholder="Activity name"
 							/>
@@ -161,7 +172,15 @@ export default function Form() {
 								type="number"
 								name="duration"
 								value={activity.duration}
-								onChange={handleChange}
+								onChange={(event) =>
+									handleChange(
+										event,
+										activity,
+										setActivity,
+										setErrors,
+										activityNames
+									)
+								}
 								className={style.input}
 							/>
 						</div>
@@ -183,7 +202,15 @@ export default function Form() {
 											name="difficulty"
 											value={difficulty}
 											checked={activity.difficulty === difficulty}
-											onChange={handleChange}
+											onChange={(event) =>
+												handleChange(
+													event,
+													activity,
+													setActivity,
+													setErrors,
+													activityNames
+												)
+											}
 										></input>
 										<label key={index} htmlFor="difficulty">
 											{difficulty}
@@ -211,7 +238,15 @@ export default function Form() {
 											value={season}
 											checked={activity.seasons.includes(season)}
 											key={index}
-											onChange={handleChange}
+											onChange={(event) =>
+												handleChange(
+													event,
+													activity,
+													setActivity,
+													setErrors,
+													activityNames
+												)
+											}
 										/>
 										<label htmlFor={season}>{season}</label>
 									</div>
@@ -239,7 +274,15 @@ export default function Form() {
 					<MultiSelect
 						countriesByContinent={countriesByContinent}
 						activity={activity}
-						handleChange={handleChange}
+						onChange={(event) =>
+							handleChange(
+								event,
+								activity,
+								setActivity,
+								setErrors,
+								activityNames
+							)
+						}
 					/>
 				</div>
 				<button
