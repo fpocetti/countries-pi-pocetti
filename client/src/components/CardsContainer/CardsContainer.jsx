@@ -16,34 +16,33 @@ export default function CardsContainer() {
 
 	return (
 		<div className={style.container}>
-			<div>
-				{filteredCountries.length === 0 ? (
-					<EmptyCard className={style.emptyCard} />
-				) : (
-					<div className={style.pages}>
-						<div className={style.cardsContainer}>
-							{filteredCountries
-								?.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize)
-								.map((country, index) => {
-									return (
-										<Card
-											key={index}
-											id={country.id}
-											flag={country.flag}
-											continent={country.continent}
-											name={country.name}
-										/>
-									);
-								})}
-						</div>
-						{totalPageCount > 1 && (
-							<div className={style.pagination}>
-								<Pagination />
-							</div>
-						)}
+			{filteredCountries.length === 0 ? (
+				<EmptyCard className={style.emptyCard} />
+			) : (
+				<div className={style.page}>
+					<div className={style.cardsContainer}>
+						{filteredCountries
+							?.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize)
+							.map((country, index) => {
+								return (
+									<Card
+										key={index}
+										id={country.id}
+										flag={country.flag}
+										continent={country.continent}
+										name={country.name}
+										className={style.card}
+									/>
+								);
+							})}
 					</div>
-				)}
-			</div>
+					{totalPageCount > 1 && (
+						<div className={style.pagination}>
+							<Pagination />
+						</div>
+					)}
+				</div>
+			)}
 		</div>
 	);
 }

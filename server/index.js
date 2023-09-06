@@ -7,7 +7,7 @@ const PORT = 3001;
 //!change {force: false} before sending PI for correction!!
 
 conn
-	.sync({ force: true })
+	.sync({ force: false })
 	.then(() => {
 		getServer().listen(PORT, async () => {
 			console.log(`Server listening on port ${PORT}`);

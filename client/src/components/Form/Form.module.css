@@ -3,30 +3,73 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 85vh;
-	background: linear-gradient((255, 255, 255, 0.9), (255, 255, 255, 0.3));
-	background-image: url('../../assets/form-activities-background-2.jpg');
-	background-size: cover;
-	background-position: center;
-}
-
-.form {
-	background-color: rgba(0, 0, 0, 0.806);
-	display: flex;
-	flex-direction: column;
-	height: 70vh;
-	padding: 0 40px;
-	border-radius: 5px;
+	justify-content: center;
+	/* background: linear-gradient(rgba(25, 24, 24, 0.9), rgba(9, 9, 9, 0.3)),
+		url('../../assets/form-activities-background-2.jpg'); */
+	background-color: #3a3a3a;
 	width: 800px;
-	margin-top: 20px;
+	margin-top: 30px;
+	border-radius: 5px;
+	margin-left: 40vh;
 }
 
 .title {
 	line-height: 1.1;
-	color: #535bf2;
-	height: 10vh;
+	color: white;
 	font-size: 2em;
 	text-align: center;
+	margin: 20px 0 15px 0;
+}
+
+.subtitle {
+	margin: 5px 0 10px 0;
+	background-color: rgba(255, 255, 255, 0.545);
+	border-radius: 5px;
+	padding: 0 10px 0 10px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px 40px 40px 40px;
+	border-radius: 5px;
+	width: 90%;
+}
+
+.sectionTitle {
+	font-size: 18px;
+	color: #535bf2;
+	margin: 5px 0 5px 0;
+}
+
+.activity {
+	padding: 15px;
+	background-color: white;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	height: 350px;
+	min-width: 640px;
+	overflow-x: auto;
+	margin-bottom: 10px;
+}
+
+.countryRelation {
+	width: 50%;
+	min-width: 640px;
+	overflow-x: auto;
+	padding: 15px;
+	background-color: white;
+	border-radius: 5px;
+	border-color: #535bf2;
+	border-width: 2px;
+}
+
+.labelInput {
+	display: flex;
+	flex-direction: row;
 }
 
 .input {
@@ -52,15 +95,10 @@
 }
 
 .customLabel {
-	padding: 10px;
+	padding: 15px;
 	font-weight: 600;
 	margin-right: 10px;
-	width: 120px;
-}
-
-.labelInput {
-	display: flex;
-	flex-direction: row;
+	font-size: 16px;
 }
 
 .seasonContainer {
@@ -70,8 +108,9 @@
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 10px;
-	margin-left: 15px;
-	padding-top: 10px;
+	margin-left: 50px;
+	align-items: center;
+	width: 400px;
 }
 
 .errorMessage {
@@ -90,9 +129,10 @@
 	background-color: white;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
+	align-items: center;
 	gap: 10px;
-	margin-left: 15px;
-	padding-top: 10px;
+	margin-left: 40px;
+	width: 250px;
 }
 
 .formSelection {
@@ -102,37 +142,17 @@
 .selectCountriesContainer {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 	border-radius: 5px 5px 0 0;
 	background-color: white;
 }
 
-.continentContainer {
-	max-height: 500px;
-	overflow-y: auto;
-	background-color: white;
-	border-radius: 0 0 5px 5px;
-	border-color: #535bf2;
-	padding: 10px;
-	margin-bottom: 15px;
-}
-
-.continentTitle {
-	font-weight: bold;
-	font-size: 14px;
-	margin-top: 10px;
-}
-
-.countriesContainer {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 10px;
-	align-items: center;
-	font-weight: 400;
-}
-
 .formButton {
-	margin-top: 10px;
+	margin-top: 20px;
 	margin-bottom: 30px;
 	background-color: #535bf2;
 	color: white;
+	width: 94%;
+	font-weight: 600;
 }

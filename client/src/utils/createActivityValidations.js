@@ -1,6 +1,7 @@
 const regexName = /^[a-zA-Z]+(?:[- ]?[a-zA-Z]+)*$/;
 
-const createActivityValidations = (activity) => {
+const createActivityValidations = (activity, activityNames) => {
+	console.log(activityNames);
 	const errors = {};
 
 	if (activity.name.length === 0) {
@@ -9,9 +10,10 @@ const createActivityValidations = (activity) => {
 	if (!regexName.test(activity.name)) {
 		errors.name = 'Only letters, spaces or hyphon "-" allowed';
 	}
-
-	//add validation requesting all activities from db to see if it exists
-
+	if (activityNames.includes(activity.name.trim())) {
+		errors.name =
+			'This name has already been used. Please create a different activity';
+	}
 	if (activity.difficulty.length === 0) {
 		errors.difficulty =
 			'Difficulty is a mandatory field. 1 for lowest, 5 for highest';
