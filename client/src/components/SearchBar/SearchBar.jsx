@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import style from './SearchBar.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getCountries, getCountriesByName } from '../../redux/action';
 
@@ -18,12 +18,17 @@ export default function SearchBar() {
 		return searchQuery;
 	};
 
-	const handleSearch = (searchQuery) => {
+	const handleSearch = async (searchQuery) => {
 		if (location.pathname !== '/countries') {
 			navigate('/countries');
 			if (searchQuery.length !== 0) {
-				dispatch(getCountriesByName(searchQuery));
-				navigate(`/countries?name=${searchQuery}`);
+				try {
+					const response = await dispatch(getCountriesByName(searchQuery));
+					navigate(`/countries?name=${searchQuery}`);
+					console.log(response);
+				} catch (error) {
+					console.error(error);
+				}
 			}
 		} else if (
 			location.pathname === '/countries' &&
@@ -45,6 +50,7 @@ export default function SearchBar() {
 				navigate('/countries');
 			}
 		}
+		setSearchQuery('');
 	};
 
 	return (

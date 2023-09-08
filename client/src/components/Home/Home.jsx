@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
 import CardsContainer from '../CardsContainer/CardsContainer';
 import Filters from '../Filters/Filters';
 import style from './Home.module.css';
@@ -14,10 +15,8 @@ export default function Home() {
 	const dispatch = useDispatch();
 	const location = useLocation();
 
-	const allCountries = useSelector((state) => state.allCountries);
 	const filteredCountries = useSelector((state) => state.filteredCountries);
 	const searchQuery = useSelector((state) => state.searchQuery);
-	const refresh = useSelector((state) => state.refresh);
 
 	useEffect(() => {
 		if (location.search.length === 0) dispatch(getCountries());

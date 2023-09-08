@@ -14,23 +14,23 @@ import {
 	PREV_PAGE,
 	GET_COUNTRY_BY_NAME,
 	POST_ACTIVITY,
+	REQUEST_ERROR,
 } from './action-types';
 
 export const getCountries = () => {
 	return async function (dispatch) {
 		try {
 			let response;
-			/* 			if (name) {
-				response = await axios.get(`${URL_COUNTRIES}?name=${name}`);
-			} else {
-      } */
 			response = await axios.get(URL_COUNTRIES);
 			return dispatch({
 				type: GET_COUNTRIES,
 				payload: response.data,
 			});
 		} catch (error) {
-			console.error(error);
+			return dispatch({
+				type: REQUEST_ERROR,
+				payload: error.response.data,
+			});
 		}
 	};
 };
@@ -46,7 +46,10 @@ export const getCountriesByName = (name) => {
 				payload: response.data,
 			});
 		} catch (error) {
-			console.error(error);
+			return dispatch({
+				type: REQUEST_ERROR,
+				payload: error.response.data,
+			});
 		}
 	};
 };
@@ -60,7 +63,10 @@ export const getActivityNames = () => {
 				payload: response.data,
 			});
 		} catch (error) {
-			console.error(error);
+			return dispatch({
+				type: REQUEST_ERROR,
+				payload: error.response.data,
+			});
 		}
 	};
 };
@@ -76,7 +82,10 @@ export const postActivity = (activity) => {
 				});
 			});
 		} catch (error) {
-			console.error(error);
+			return dispatch({
+				type: REQUEST_ERROR,
+				payload: error.response.data,
+			});
 		}
 	};
 };

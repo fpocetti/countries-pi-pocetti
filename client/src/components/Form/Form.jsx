@@ -9,21 +9,19 @@ import {
 } from '../../redux/action';
 import createActivityValidations from '../../utils/createActivityValidations';
 import MultiSelect from '../MultiSelect/MultiSelect';
-//import handleFormChange from '../../utils/handleFormChange';
 
 export default function Form() {
 	const allCountries = useSelector((state) => state.allCountries);
+	const postMessage = useSelector((state) => state.postMessage);
 	//connect to Activity names to validate if name is in use
 	const allActivities = useSelector((state) => state.allActivities);
 	const activityNames = allActivities.map((activity) => activity.name);
 	//connect to post response
-	const postMessage = useSelector((state) => state.postMessage);
 
 	const dispatch = useDispatch();
 
 	//Reorganize countries by continent to improve form's UX
 	let countriesByContinent = {};
-
 	allCountries.forEach((country) => {
 		if (!countriesByContinent[country.continent]) {
 			countriesByContinent[country.continent] = [];
@@ -115,8 +113,6 @@ export default function Form() {
 			}));
 		}
 	};
-	console.log('Activity: ', activity);
-	console.log('Error: ', errors);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();

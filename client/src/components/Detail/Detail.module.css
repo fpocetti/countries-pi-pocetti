@@ -1,42 +1,66 @@
 .detail {
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
-	height: 100vh;
+	justify-content: center;
+	height: 80vh;
 	width: 100%;
 	background-color: #242424;
 }
 
 .detailDescription {
 	flex: 1;
+	display: flex;
+	flex-direction: column;
+
 	height: 100%;
-	margin-left: 50px;
-	color: white;
+	margin: 40px 0 0 50px;
+	background-color: #d3d5ff;
+	border-radius: 5px;
+	overflow-y: auto;
 }
 
 .name {
 	font-size: 50px;
 	font-weight: 600;
 	padding-bottom: 20px;
-	margin-left: 60px;
 	letter-spacing: 2px;
 	color: #646cff;
+	text-align: center;
 }
 
 .otherInfo {
 	font-size: 22px;
 	font-weight: 500;
 	letter-spacing: 1px;
-	margin-left: 60px;
+	margin: 0 0 10px 60px;
+	color: #242424;
 }
 
 .image {
 	flex: 1;
 	height: 100%;
-	align-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 .countryImage {
 	border-radius: 5px;
-	margin-top: 20%;
-	margin-left: 25%;
+	max-width: 50%;
+	max-height: 30%;
+	height: auto;
+}
+
+.noActivity {
+	font-weight: 400;
+	font-style: italic;
+	text-align: right;
+	margin-right: 10px;
+}
+
+.activity {
+	margin: 0 0 0 30vh;
+	font-weight: 400;
+	font-size: 20px;
+	color: #242424;
 }

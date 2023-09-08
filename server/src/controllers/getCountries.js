@@ -20,11 +20,7 @@ const getCountries = async (req, res) => {
 			include: [{ model: Activity, through: { attributes: [] } }],
 		});
 		if (response.length === 0)
-			return res
-				.status(404)
-				.send(
-					'Country not found. Please provide a valid name or search for all Countries instead'
-				);
+			return res.status(404).send('404 Country not found');
 		return res.status(200).json(response);
 	} catch (error) {
 		return res.status(400).json({ error: error.message });

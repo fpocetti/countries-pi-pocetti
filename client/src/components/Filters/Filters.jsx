@@ -34,7 +34,13 @@ export default function Filters() {
 		}
 		return continents;
 	});
+
 	const activityNames = allActivities.map((activity) => activity.name);
+	const activityNamesFormated = activityNames.map((activity) => {
+		const firstLetter = activity.charAt(0).toUpperCase();
+		const restOfString = activity.slice(1).toLowerCase();
+		return firstLetter + restOfString;
+	});
 
 	const dispatch = useDispatch();
 
@@ -93,7 +99,7 @@ export default function Filters() {
 						value={activityFilter}
 					>
 						<option value="reset">Activity</option>
-						{activityNames.sort().map((activity, index) => (
+						{activityNamesFormated.sort().map((activity, index) => (
 							<option value={activity} key={index}>
 								{activity}
 							</option>

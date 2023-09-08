@@ -8,11 +8,11 @@ import {
 	ORDER_BY_POPULATION,
 	FILTER_BY_ACTIVITY,
 	FILTER_BY_CONTINENT,
-	REFRESH,
 	RESET,
 	NEXT_PAGE,
 	PREV_PAGE,
 	POST_ACTIVITY,
+	REQUEST_ERROR,
 } from './action-types';
 
 import applyFilters from '../utils/applyFilters';
@@ -23,6 +23,7 @@ const initialState = {
 	allActivities: [],
 	refresh: false,
 	searchQuery: '',
+	axiosError: null,
 	postMessage,
 	pagination: {
 		page: 1,
@@ -52,6 +53,7 @@ const rootReducer = (state = initialState, action) => {
 
 			return {
 				...state,
+				axiosError: null,
 				pagination: {
 					...state.pagination,
 					countriesCount: totalCountries.length,
@@ -69,6 +71,7 @@ const rootReducer = (state = initialState, action) => {
 
 			return {
 				...state,
+				axiosError: null,
 				filteredCountries: totalCountries,
 				pagination: {
 					...state.pagination,
@@ -85,6 +88,7 @@ const rootReducer = (state = initialState, action) => {
 
 			return {
 				...state,
+				axiosError: null,
 				allActivities: [...action.payload],
 			};
 
@@ -92,6 +96,7 @@ const rootReducer = (state = initialState, action) => {
 			console.log('ejecución del post activity: ', action.payload);
 			return {
 				...state,
+				axiosError: null,
 				postMessage: action.payload,
 			};
 
@@ -229,6 +234,14 @@ const rootReducer = (state = initialState, action) => {
 					...state.pagination,
 					page: action.payload,
 				},
+			};
+			return response;
+
+		case REQUEST_ERROR:
+			console.log('Ejecución del error de petición ', action.payload);
+			response = {
+				...state,
+				axiosError: action.payload,
 			};
 			return response;
 
