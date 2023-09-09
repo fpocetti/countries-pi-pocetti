@@ -1,7 +1,6 @@
 const regexName = /^[a-zA-Z]+(?:[- ]?[a-zA-Z]+)*$/;
 
 const createActivityValidations = (activity, activityNames) => {
-	console.log(activityNames);
 	const errors = {};
 
 	if (activity.name.length === 0) {

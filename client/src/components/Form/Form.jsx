@@ -13,6 +13,8 @@ import MultiSelect from '../MultiSelect/MultiSelect';
 export default function Form() {
 	const allCountries = useSelector((state) => state.allCountries);
 	const postMessage = useSelector((state) => state.postMessage);
+	const axiosError = useSelector((state) => state.axiosError);
+
 	//connect to Activity names to validate if name is in use
 	const allActivities = useSelector((state) => state.allActivities);
 	const activityNames = allActivities.map((activity) => activity.name);
@@ -114,36 +116,39 @@ export default function Form() {
 		}
 	};
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
+		dispatch(postActivity(activity));
+		setActivity({
+			name: '',
+			difficulty: '',
+			duration: '',
+			seasons: '',
+			countries: '',
+		});
 
-		try {
-			await dispatch(postActivity(activity));
-			setActivity({
-				name: '',
-				difficulty: '',
-				duration: '',
-				seasons: '',
-				countries: '',
-			});
-		} catch (error) {
-			console.error(error);
+		if (axiosError) {
+			alert(axiosError);
+		} else {
+			alert(postMessage);
 		}
-		alert(postMessage);
 	};
 
+	//server requests when mounting component
 	useEffect(() => {
 		dispatch(getCountries());
 		dispatch(getActivityNames());
+	}, []);
 
-		//handle asynchrony in name validation
+	//handle asynchrony in name validation
+	useEffect(() => {
 		if (activityNames.includes(activity.name.trim())) {
 			setErrors({
 				...errors,
 				name: 'This name has already been used. Please create a different activity',
 			});
 		}
-	}, [activity]);
+	}, [activity.name]);
 
 	return (
 		<div className={style.formContainer}>

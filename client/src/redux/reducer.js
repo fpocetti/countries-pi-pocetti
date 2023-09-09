@@ -21,10 +21,9 @@ const initialState = {
 	allCountries: [],
 	filteredCountries: [],
 	allActivities: [],
-	refresh: false,
 	searchQuery: '',
 	axiosError: null,
-	postMessage,
+	postMessage: '',
 	pagination: {
 		page: 1,
 		pageSize: 10,
@@ -44,7 +43,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
 	let response;
 	let totalCountries;
-	let totalPages;
 
 	switch (action.type) {
 		case GET_COUNTRIES:
@@ -109,11 +107,11 @@ const rootReducer = (state = initialState, action) => {
 				},
 				order: {
 					by: 'name',
-					type: action.payload === 'Population Ascending' ? 'asc' : 'desc',
+					type: action.payload === 'Name Ascending' ? 'asc' : 'desc',
 				},
 			};
 			response.filteredCountries = applyFilters(
-				response.allCountries,
+				state.allCountries,
 				response.appliedFilters,
 				response.order
 			);
@@ -133,7 +131,7 @@ const rootReducer = (state = initialState, action) => {
 				},
 			};
 			response.filteredCountries = applyFilters(
-				response.allCountries,
+				state.allCountries,
 				response.appliedFilters,
 				response.order
 			);
@@ -152,7 +150,7 @@ const rootReducer = (state = initialState, action) => {
 				},
 			};
 			response.filteredCountries = applyFilters(
-				response.allCountries,
+				state.allCountries,
 				response.appliedFilters,
 				response.order
 			);
@@ -176,7 +174,7 @@ const rootReducer = (state = initialState, action) => {
 				},
 			};
 			response.filteredCountries = applyFilters(
-				response.allCountries,
+				state.allCountries,
 				response.appliedFilters,
 				response.order
 			);
@@ -188,9 +186,9 @@ const rootReducer = (state = initialState, action) => {
 			return response;
 
 		case RESET:
-			console.log('Ejecución OK del reset');
 			response = {
 				...state,
+				axiosError: null,
 				appliedFilters: {
 					continent: null,
 					activity: null,
@@ -206,7 +204,7 @@ const rootReducer = (state = initialState, action) => {
 				searchQuery: '',
 			};
 			response.filteredCountries = applyFilters(
-				response.allCountries,
+				state.allCountries,
 				response.appliedFilters,
 				response.order
 			);

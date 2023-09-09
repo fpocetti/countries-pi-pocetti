@@ -8,7 +8,6 @@ import {
 	ORDER_BY_POPULATION,
 	FILTER_BY_ACTIVITY,
 	FILTER_BY_CONTINENT,
-	REFRESH,
 	RESET,
 	NEXT_PAGE,
 	PREV_PAGE,
@@ -91,6 +90,7 @@ export const postActivity = (activity) => {
 };
 
 export function orderByName(order) {
+	console.log(order, 'en el action');
 	return {
 		type: ORDER_BY_NAME,
 		payload: order,
@@ -112,12 +112,6 @@ export function filterByContinent(continent) {
 	return {
 		type: FILTER_BY_CONTINENT,
 		payload: continent,
-	};
-}
-
-export function refresh() {
-	return {
-		type: REFRESH,
 	};
 }
 

@@ -28,7 +28,7 @@ export default function Home() {
 		dispatch(getActivityNames());
 	}, [searchQuery]);
 
-	console.log('countries count at Home: ', filteredCountries.length);
+	console.log('filteredCountries count at Home: ', filteredCountries.length);
 
 	return (
 		<div className={style.container}>
