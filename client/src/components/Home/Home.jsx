@@ -19,9 +19,12 @@ export default function Home() {
 	const searchQuery = useSelector((state) => state.searchQuery);
 
 	useEffect(() => {
-		if (location.search.length === 0) dispatch(getCountries());
-		if (location.search === `?name:${searchQuery}`)
+		if (location.search === `?name:${searchQuery}`) {
 			dispatch(getCountriesByName(searchQuery));
+		}
+		if (location.search.length === 0) {
+			dispatch(getCountries());
+		}
 		dispatch(getActivityNames());
 	}, [searchQuery]);
 

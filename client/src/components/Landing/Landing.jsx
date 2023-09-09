@@ -1,4 +1,3 @@
-import React from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import { useNavigate } from 'react-router-dom';
 import style from './Landing.module.css';

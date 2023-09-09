@@ -13,11 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 export default function Filters() {
-	const filteredCountries = useSelector((state) => state.filteredCountries);
 	const allCountries = useSelector((state) => state.allCountries);
 	const allActivities = useSelector((state) => state.allActivities);
-	const appliedFilters = useSelector((state) => state.appliedFilters);
-	const order = useSelector((state) => state.order);
 
 	const [nameOrder, setNameOrder] = useState('');
 	const [populationOrder, setPopulationOrder] = useState('');
