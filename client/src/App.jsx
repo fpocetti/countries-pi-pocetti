@@ -5,7 +5,6 @@ import Form from '../src/components/Form/Form.jsx';
 import NavBar from '../src/components/NavBar/NavBar.jsx';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import MultiSelect from './components/MultiSelect/MultiSelect.jsx';
-import RenderTest from './components/RenderTest/RenderTest.jsx';
 
 function App() {
 	const currentLocation = useLocation();
@@ -18,7 +17,6 @@ function App() {
 				<Route path="/countries" element={<Home />} />
 				<Route path="/countries/:id" element={<Detail />} />
 				<Route path="/activity/create" element={<Form />} />
-				<Route path="/rendertest" element={<RenderTest />} />
 			</Routes>
 		</>
 	);
