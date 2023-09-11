@@ -151,140 +151,144 @@ export default function Form() {
 	}, [activity.name]);
 
 	return (
-		<div className={style.formContainer}>
-			<h2 className={style.title}>
-				🏄🏻‍♀️ Fill in this form to create a new activity ⛺
-			</h2>
+		<div className={style.centerForm}>
+			<div className={style.formContainer}>
+				<h2 className={style.title}>
+					🏄🏻‍♀️ Fill in this form to create a new activity ⛺
+				</h2>
 
-			<form onSubmit={handleSubmit} className={style.form}>
-				<div className={style.activity}>
-					<h3 className={style.sectionTitle}>1. Describe your activity</h3>
-					<div className={style.formSection}>
-						<div className={style.labelInput}>
-							<label htmlFor="name" className={style.customLabel}>
-								Activity name
-							</label>
-							<input
-								type="text"
-								name="name"
-								value={activity.name}
-								onChange={handleChange}
-								className={style.input}
-								placeholder="Activity name"
-							/>
-						</div>
-						{errors.name && <p className={style.errorMessage}>{errors.name}</p>}
-					</div>
-
-					<div className={style.formSection}>
-						<div className={style.labelInput}>
-							<label htmlFor="duration" className={style.customLabel}>
-								Duration (hs)
-							</label>
-							<input
-								type="number"
-								name="duration"
-								value={activity.duration}
-								onChange={handleChange}
-								className={style.input}
-							/>
-						</div>
-						{errors.duration && (
-							<p className={style.errorMessage}>{errors.duration}</p>
-						)}
-					</div>
-
-					<div className={style.formSection}>
-						<div className={style.labelInput}>
-							<label htmlFor="difficulty" className={style.customLabel}>
-								Difficulty
-							</label>
-							<div className={style.difficultyContainer}>
-								{difficultyLevels.map((difficulty, index) => (
-									<div key={index}>
-										<input
-											className={style.option}
-											type="radio"
-											name="difficulty"
-											value={difficulty}
-											checked={activity.difficulty === difficulty}
-											onChange={handleChange}
-										></input>
-										<label key={index} htmlFor="difficulty">
-											{difficulty}
-										</label>
-									</div>
-								))}
+				<form onSubmit={handleSubmit} className={style.form}>
+					<div className={style.activity}>
+						<h3 className={style.sectionTitle}>1. Describe your activity</h3>
+						<div className={style.formSection}>
+							<div className={style.labelInput}>
+								<label htmlFor="name" className={style.customLabel}>
+									Activity name
+								</label>
+								<input
+									type="text"
+									name="name"
+									value={activity.name}
+									onChange={handleChange}
+									className={style.input}
+									placeholder="Activity name"
+								/>
 							</div>
+							{errors.name && (
+								<p className={style.errorMessage}>{errors.name}</p>
+							)}
 						</div>
-						{errors.difficulty && (
-							<p className={style.errorMessage}>{errors.difficulty}</p>
-						)}
-					</div>
 
-					<div className={style.formSection}>
-						<div className={style.labelInput}>
-							<label htmlFor="seasons" className={style.customLabel}>
-								Season
-							</label>
-							<div className={style.seasonContainer}>
-								{seasons.sort().map((season, index) => (
-									<div key={index}>
-										<input
-											className={style.option}
-											type="checkbox"
-											name="seasons"
-											value={season}
-											checked={activity.seasons.includes(season)}
-											key={index}
-											onChange={handleChange}
-										/>
-										<label htmlFor={season}>{season}</label>
-									</div>
-								))}
+						<div className={style.formSection}>
+							<div className={style.labelInput}>
+								<label htmlFor="duration" className={style.customLabel}>
+									Duration (hs)
+								</label>
+								<input
+									type="number"
+									name="duration"
+									value={activity.duration}
+									onChange={handleChange}
+									className={style.input}
+								/>
 							</div>
+							{errors.duration && (
+								<p className={style.errorMessage}>{errors.duration}</p>
+							)}
 						</div>
-						{errors.seasons && (
-							<p className={style.errorMessage}>{errors.seasons}</p>
-						)}
-					</div>
-				</div>
 
-				<div className={style.countryRelation}>
-					<div className={style.selectCountriesContainer}>
-						<h3 className={style.sectionTitle}>
-							2. Select at least one country
-						</h3>
-						<div>
-							{errors.countries && (
-								<p className={style.errorMessage}>{errors.countries}</p>
+						<div className={style.formSection}>
+							<div className={style.labelInput}>
+								<label htmlFor="difficulty" className={style.customLabel}>
+									Difficulty
+								</label>
+								<div className={style.difficultyContainer}>
+									{difficultyLevels.map((difficulty, index) => (
+										<div key={index}>
+											<input
+												className={style.option}
+												type="radio"
+												name="difficulty"
+												value={difficulty}
+												checked={activity.difficulty === difficulty}
+												onChange={handleChange}
+											></input>
+											<label key={index} htmlFor="difficulty">
+												{difficulty}
+											</label>
+										</div>
+									))}
+								</div>
+							</div>
+							{errors.difficulty && (
+								<p className={style.errorMessage}>{errors.difficulty}</p>
+							)}
+						</div>
+
+						<div className={style.formSection}>
+							<div className={style.labelInput}>
+								<label htmlFor="seasons" className={style.customLabel}>
+									Season
+								</label>
+								<div className={style.seasonContainer}>
+									{seasons.sort().map((season, index) => (
+										<div key={index}>
+											<input
+												className={style.option}
+												type="checkbox"
+												name="seasons"
+												value={season}
+												checked={activity.seasons.includes(season)}
+												key={index}
+												onChange={handleChange}
+											/>
+											<label htmlFor={season}>{season}</label>
+										</div>
+									))}
+								</div>
+							</div>
+							{errors.seasons && (
+								<p className={style.errorMessage}>{errors.seasons}</p>
 							)}
 						</div>
 					</div>
 
-					<MultiSelect
-						countriesByContinent={countriesByContinent}
-						activity={activity}
-						handleChange={handleChange}
-					/>
-				</div>
-				<button
-					type="submit"
-					className={style.formButton}
-					disabled={
-						activity.countries.length === 0 ||
-						activity.difficulty.length === 0 ||
-						activity.seasons.length === 0 ||
-						errors.name ||
-						errors.duration ||
-						errors.seasons ||
-						errors.difficulty ||
-						errors.countries
-					}
-				>
-					💫 Create activity 💫
-				</button>
-			</form>
+					<div className={style.countryRelation}>
+						<div className={style.selectCountriesContainer}>
+							<h3 className={style.sectionTitle}>
+								2. Select at least one country
+							</h3>
+							<div>
+								{errors.countries && (
+									<p className={style.errorMessage}>{errors.countries}</p>
+								)}
+							</div>
+						</div>
+
+						<MultiSelect
+							countriesByContinent={countriesByContinent}
+							activity={activity}
+							handleChange={handleChange}
+						/>
+					</div>
+					<button
+						type="submit"
+						className={style.formButton}
+						disabled={
+							activity.countries.length === 0 ||
+							activity.difficulty.length === 0 ||
+							activity.seasons.length === 0 ||
+							errors.name ||
+							errors.duration ||
+							errors.seasons ||
+							errors.difficulty ||
+							errors.countries
+						}
+					>
+						💫 Create activity 💫
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 }

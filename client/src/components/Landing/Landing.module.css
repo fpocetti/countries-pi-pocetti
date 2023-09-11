@@ -22,12 +22,13 @@
 }
 
 .landingButton {
-	border-width: 3px;
+	border-width: 1.5px;
 	border-color: #646cff;
 }
 button:hover {
 	box-shadow: 2px aliceblue;
 	border-color: #646cff;
+	border-width: 2px;
 	filter: drop-shadow(0 0 2em #646cffaa);
 	-webkit-transform: scale(1.03);
 }
