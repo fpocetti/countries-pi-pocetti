@@ -42,6 +42,7 @@ export default function Pagination() {
 				onClick={handlePrevious}
 				className={style.button}
 				disabled={disablePrevButton}
+				id="prev"
 			>
 				{'< Previous'}
 			</button>
@@ -52,6 +53,7 @@ export default function Pagination() {
 				onClick={handleNext}
 				className={style.button}
 				disabled={disableNextButton}
+				id="next"
 			>
 				{'Next >'}
 			</button>

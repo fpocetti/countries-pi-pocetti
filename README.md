@@ -279,7 +279,7 @@ Este formulario debe ser ✅ **controlado completamente con JavaScritp**. No se 
 Ten en cuenta que en esta instancia no es obligatorio el desarrollo de testing para tu aplicación. De igual manera, te desafiamos a que los hagas, ¡ya que suman puntos!
 
 - Al menos tener un componente del frontend con sus tests respectivos.
-- Al menos tener dos rutas del backend con sus tests respectivos.
+- ✅ ✅ Al menos tener dos rutas del backend con sus tests respectivos.
 - Al menos tener un modelo de la base de datos con sus tests respectivos.
 
 <br />
