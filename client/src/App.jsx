@@ -4,7 +4,6 @@ import Detail from '../src/components/Detail/Detail.jsx';
 import Form from '../src/components/Form/Form.jsx';
 import NavBar from '../src/components/NavBar/NavBar.jsx';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import MultiSelect from './components/MultiSelect/MultiSelect.jsx';
 
 function App() {
 	const currentLocation = useLocation();
