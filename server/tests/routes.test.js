@@ -99,6 +99,10 @@ beforeEach(async () => {
 		});
 });
 
+afterAll(async () => {
+	await conn.close();
+});
+
 describe('GET /activities', () => {
 	it('should return status 200', async () => {
 		const response = await request(serverInstance).get('/activities').send();
